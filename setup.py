@@ -29,7 +29,7 @@ setup(
     name = "NetworkSecurity", 
     author = "peniel18",
     author_email = "penieletornam18@gmail.com",
-    version = "0.0.1" , 
+    version = "0.0.1", 
     find_packages = find_packages(), 
     install_requires = get_requirements()
 )
