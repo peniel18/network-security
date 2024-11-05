@@ -1,4 +1,5 @@
 import sys
+from networksecurity.logging.logger import logging
 
 
 class NetworkSecurityException(Exception):
@@ -10,5 +11,3 @@ class NetworkSecurityException(Exception):
     
     def __str__(self):
         return f"Error occured in python script [{self.file_name}] line number [{str(self.error_message)}] error message"
-    
-
