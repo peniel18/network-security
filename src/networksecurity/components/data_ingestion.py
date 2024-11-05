@@ -21,7 +21,7 @@ class DataIngestion:
         try: 
             self.data_ingestion_config = data_ingestion_config
         except Exception as e: 
-            NetworkSecurityException(e, sys)
+            raise NetworkSecurityException(e, sys)
 
     def export_collection_as_datafram(self) -> pd.DataFrame:
         """
@@ -45,7 +45,7 @@ class DataIngestion:
             return dataframe
         
         except Exception as e: 
-            NetworkSecurityException(e, sys)
+            raise NetworkSecurityException(e, sys)
 
     def export_data_to_feature_store(self, dataframe: pd.DataFrame): 
         try: 
@@ -56,14 +56,30 @@ class DataIngestion:
             dataframe.to_csv(feature_store_file_path, index=False, header=True)
             return dataframe
         except Exception as e: 
-            NetworkSecurityException(e, sys)
+            raise NetworkSecurityException(e, sys)
 
 
     def split_data(self, dataframe: pd.DataFrame): 
         try: 
-            pass
+            train_set, test_set = train_test_split(
+                    dataframe, test_size = self.data_ingestion_config.test_test_spilt_ratio
+                )
+            logging.info("Data split spliting Completed")
+            dir_path = os.path.dirname(self.data_ingestion_config.training_file_path)
+            os.makedirs(dir_path, exist_ok=True)
+            logging.info("Exporting train and test file path")
+
+            train_set.to_csv(
+                    self.data_ingestion_config.training_file_path, index=False, header=True
+                )
+            test_set.to_csv(
+                    self.data_ingestion_config.testing_file_path, index=False, header=True
+                )
+            
+            logging.info("Exported train and test file path")
+
         except Exception as e: 
-            NetworkSecurityException(e, sys)
+            raise NetworkSecurityException(e, sys)
 
     def IntiateDataIngestion(self):
         try: 
@@ -71,4 +87,4 @@ class DataIngestion:
             dataframe = self.export_data_to_feature_store(dataframe)
 
         except Exception as e: 
-            NetworkSecurityException(e, sys)
+            raise NetworkSecurityException(e, sys)
