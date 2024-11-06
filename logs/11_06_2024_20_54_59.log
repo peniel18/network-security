@@ -1,0 +1,4 @@
+[2024-11-06 20:55:01,177] 33 root - INFO - export_collection_as_dataframe has started
+[2024-11-06 20:56:22,763] 66 root - INFO - Data split spliting Completed
+[2024-11-06 20:56:22,770] 69 root - INFO - Exporting train and test file path
+[2024-11-06 20:56:22,914] 78 root - INFO - Exported train and test file path
