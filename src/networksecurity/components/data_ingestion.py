@@ -82,6 +82,7 @@ class DataIngestion:
 
     def IntiateDataIngestion(self):
         try: 
+            logging.info(f"Data Ingestion has Started")
             dataframe = self.export_collection_as_datafram()
             dataframe = self.export_data_to_feature_store(dataframe)
             self.split_data(dataframe)
