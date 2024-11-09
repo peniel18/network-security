@@ -68,7 +68,7 @@ class DataValidation:
                 if  str(dataframe[col].dtype) not in ExpectedDataTypes: 
                     return False 
             return True 
-        
+
         except Exception as e: 
             logging.error(f"Error validaing numerical columns: {str(e)}")
             NetworkSecurityException(e, sys)
@@ -142,6 +142,9 @@ class DataValidation:
                 invalid_test_file_path = None, 
                 drift_report_file_path = self.data_validation_config.drift_report_file_path
             )
+            # check numerical columns data types 
+            NumericalStatus = self.validateNumericalColumns(test_dataframe)
+            logging.info(f"Validation of Numerical columns data types Status: {NumericalStatus}")
 
             return data_validation_artifact
 

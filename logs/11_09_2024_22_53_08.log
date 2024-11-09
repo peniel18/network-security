@@ -1,0 +1,11 @@
+[2024-11-09 22:53:11,200] 85 root - INFO - Data Ingestion has Started
+[2024-11-09 22:53:11,200] 33 root - INFO - export_collection_as_dataframe has started
+[2024-11-09 22:54:28,067] 66 root - INFO - Data split spliting Completed
+[2024-11-09 22:54:28,073] 69 root - INFO - Exporting train and test file path
+[2024-11-09 22:54:28,232] 78 root - INFO - Exported train and test file path
+[2024-11-09 22:54:28,233] 18 root - INFO - Data Validation has Started
+[2024-11-09 22:54:28,234] 13 root - INFO - function: read_yaml_file has started
+[2024-11-09 22:54:28,303] 37 root - INFO - Required number of columns: 31
+[2024-11-09 22:54:28,305] 38 root - INFO - DataFrame columns: 31
+[2024-11-09 22:54:28,306] 37 root - INFO - Required number of columns: 31
+[2024-11-09 22:54:28,307] 38 root - INFO - DataFrame columns: 31

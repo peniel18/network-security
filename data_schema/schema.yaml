@@ -11,7 +11,7 @@ columns:
   - Favicon: int64
   - port: int64
   - HTTPS_token: int64
-  - Request_URL: int64
+  - Request_URL: float
   - URL_of_Anchor: int64
   - Links_in_tags: int64
   - SFH: int64
