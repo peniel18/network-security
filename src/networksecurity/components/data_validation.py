@@ -5,6 +5,7 @@ from networksecurity.exception.exception import NetworkSecurityException
 from networksecurity.constant.training_pipeline import SCHEMA_FILE_PATH
 from networksecurity.utils.main_utils.utils import read_yaml_file
 from scipy.stats import ks_2samp
+from typing import Set 
 import pandas as pd 
 import os 
 import sys
@@ -32,7 +33,7 @@ class DataValidation:
     def validate_number_of_columns(self, dataframe: pd.DataFrame) -> bool: 
         try: 
             #logging.info("validate_number_of_columns as started ")
-            num_of_columns = len(self._schema_config)
+            num_of_columns = len(self._schema_config["columns"])
             logging.info(f"Required number of columns: {num_of_columns}")
             logging.info(f"DataFrame columns: {len(dataframe.columns)}") 
             # check 
@@ -45,18 +46,32 @@ class DataValidation:
             raise NetworkSecurityException(e, sys)
 
     def validateNumericalColumns(self, dataframe: pd.DataFrame) -> bool: 
-        schemeFile = read_yaml_file(SCHEMA_FILE_PATH)
-        numericalColumns = schemeFile["numerical_columns"]
-        # get dtypes and name of columns
-        colNames = []
-        colTypes = []
-        for col in numericalColumns: 
-            for name, dataType in col.items(): 
-                colNames.append(name)
-                colTypes.append(dataType)
+        """
+        Validate if dataframe columns dtypes matches the Expected dtypes
+
+        Args:   
+            dataframe (pd.DataFrame): DataFrame to validate 
         
-        for column in dataframe.columns: 
-            pass 
+        Returns:
+            bool: True if all columns mactch expected, otherwise False
+        
+        """
+        try: 
+            scheme_file = self._schema_config
+            numerical_cols = scheme_file["numerical_columns"]
+            # create set that stores strings 
+            ExpectedDataTypes = {str(dtype) for column in scheme_file["columns"] 
+                                for dtype in column.values()    }
+
+            # validate each columns data type 
+            for col in dataframe[numerical_cols].columns: 
+                if  str(dataframe[col].dtype) not in ExpectedDataTypes: 
+                    return False 
+            return True 
+        
+        except Exception as e: 
+            logging.error(f"Error validaing numerical columns: {str(e)}")
+            NetworkSecurityException(e, sys)
 
         
         #print(numericalColumns)
