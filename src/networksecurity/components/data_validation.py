@@ -76,6 +76,31 @@ class DataValidation:
         
         #print(numericalColumns)
 
+    def detect_dataset_drift(self, base_df, current_df, threshold = 0.50 ) -> bool: 
+        try: 
+            status = True 
+            report = {}
+            for column in base_df.columns: 
+                data1 = base_df[column]
+                data2 = current_df[column]
+                is_sample_dist = ks_2samp(data1, data2)
+                if threshold <= is_sample_dist.pvalue: 
+                    is_found = False
+                else:
+                    is_found = True 
+                    status = False
+                
+                report.update({column: {
+                    "pvalue": float(is_sample_dist.pvalue),
+                    "drift_status" : is_found
+                }})
+            drift_report_file_path = self.data_validation_config.drift_report_file_path
+            # create dir 
+            dir_path = os.path.dirname(drift_report_file_path)
+            os.makedirs(dir_path, exist_ok=True)
+        except Exception as e: 
+            raise NetworkSecurityException(e, sys)
+
     def initiate_data_validation(self) ->  DataIngestionArtifact: 
         try: 
             train_file_path = self.data_ingestion_artifact.trained_file_path
@@ -94,7 +119,8 @@ class DataValidation:
                 error_message = f"Test DataFrame does not contain the required number of columns"
                 logging.info(error_message)
 
-
+            # data check 
+            driftStatus = 
         except Exception as e: 
             logging.error("Error occured in intiate_data_validation")
             raise NetworkSecurityException(e, sys)
