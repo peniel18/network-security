@@ -62,12 +62,15 @@ class DataValidation:
             # create set that stores strings 
             ExpectedDataTypes = {str(dtype) for column in scheme_file["columns"] 
                                 for dtype in column.values()    }
+            print(ExpectedDataTypes)
 
             # validate each columns data type 
             for col in dataframe[numerical_cols].columns: 
-                if  str(dataframe[col].dtype) not in ExpectedDataTypes: 
+                current_dtype = str(dataframe[col].dtype)
+                if  current_dtype not in ExpectedDataTypes: 
                     return False 
-            return True 
+            else:
+                return True 
 
         except Exception as e: 
             logging.error(f"Error validaing numerical columns: {str(e)}")
