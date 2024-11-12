@@ -69,9 +69,8 @@ class DataValidation:
                 current_dtype = str(dataframe[col].dtype)
                 if  current_dtype not in ExpectedDataTypes: 
                     return False 
-            else:
-                return True 
-
+            return True
+        
         except Exception as e: 
             logging.error(f"Error validaing numerical columns: {str(e)}")
             NetworkSecurityException(e, sys)
