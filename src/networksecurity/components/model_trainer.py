@@ -5,11 +5,16 @@ from networksecurity.logging.logger import logging
 from networksecurity.entity.config_entity import ModelTrainerConfig
 from networksecurity.entity.artifact_entity import DataTransformationArtifact, ModelTrainerArtifact, ClassificationMetricArtifact
 from networksecurity.utils.main_utils.utils import save_object, load_numpy_array_data, load_object
+from networksecurity.utils.main_utils.utils import evaluate_models
 from networksecurity.utils.ml_utils.model.estimator import NetworkModel
 from networksecurity.utils.ml_utils.metric.classification_metric import get_classification_score
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier, AdaBoostClassifier
+import mlflow
+from urllib.parse import urlparse 
+#import dagshub
+
 
 class ModelTrainer: 
     def __init__(self, model_trainer_config: ModelTrainerConfig, data_transformation_artifact: DataTransformationArtifact): 
@@ -19,7 +24,33 @@ class ModelTrainer:
         except Exception as e: 
             raise NetworkSecurityException(e, sys)
         
-    def train_model(self, X_train, y_train):
+    def track_mlflow(self, best_model, classificationmetric):
+        mlflow.set_registry_uri("https://dagshub.com/peniel18/network-security.mlflow")
+        tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
+        with mlflow.start_run():
+            f1_score = classificationmetric.f1_score
+            precision_score = classificationmetric.precision_score
+            recall_score = classificationmetric.recall_score
+
+
+            mlflow.log_metric("f1_score",f1_score)
+            mlflow.log_metric("precision",precision_score)
+            mlflow.log_metric("recall_score",recall_score)
+            mlflow.sklearn.log_model(best_model,"model")
+            # Model registry does not work with file store
+            if tracking_url_type_store != "file":
+
+                # Register the model
+                # There are other ways to use the Model Registry, which depends on the use case,
+                # please refer to the doc for more information:
+                # https://mlflow.org/docs/latest/model-registry.html#api-workflow
+                mlflow.sklearn.log_model(best_model, "model", registered_model_name=best_model)
+            else:
+                mlflow.sklearn.log_model(best_model, "model")
+
+
+        
+    def train_model(self, X_train, y_train, X_test, y_test):
         models = {
             "Random Forest" : RandomForestClassifier(verbose=1), 
             "Decision Tree" : DecisionTreeClassifier(), 
@@ -27,7 +58,7 @@ class ModelTrainer:
             "Logistic Regression" : LogisticRegression(verbose=1),
             "ADABoost": AdaBoostClassifier(), 
         }
-        params={
+        params = {
             "Decision Tree": {
                 'criterion':['gini', 'entropy', 'log_loss'],
                 # 'splitter':['best','random'],
@@ -51,12 +82,44 @@ class ModelTrainer:
             },
 
             "Logistic Regression":{},
-            
+
             "AdaBoost":{
                 'learning_rate':[.1,.01,.001],
                 'n_estimators': [8,16,32,64,128,256]
             }
+        }
+
+        model_report: dict = evaluate_models(X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test,
+                                             models=models, param=params)
+        best_model_score = max(sorted(model_report.values()))
+        best_model_name = list(model_report.keys())[
+            list(model_report.values()).index(best_model_score)
+        ]
+        best_model = models[best_model_name]
+        y_train_pred = best_model.predict(X_train)
+        classification_train_metric = get_classification_score(y_true=y_train, y_pred=y_train_pred)
+
+        y_test_preds = best_model.predict(X_test)
+        classification_test_metric = get_classification_score(y_true=y_test, y_pred=y_test_preds)
         
+        preprocessor = load_object(file_path = self.data_transformation_artifact.transformed_object_file_path)
+        model_dir_path = os.path.dirname(self.model_trainer_config.trained_model_file_path)
+        os.makedirs(model_dir_path, exist_ok=True)
+
+        networkModel = NetworkModel(preprocessor=preprocessor, model=best_model)
+        save_object(file_path = self.model_trainer_config.trained_model_file_path, obj = NetworkModel)
+
+        # artifacts 
+        model_trainer_artifact = ModelTrainerArtifact(
+            train_metric_artficat=classification_train_metric,
+            trained_mode_file_path=self.model_trainer_config.trained_model_file_path, 
+            test_metric_artifact=classification_test_metric
+        )
+
+        return model_trainer_artifact
+
+
+
     def InitialModelTrainer(self) -> ModelTrainerArtifact: 
         try: 
             train_file_path = self.data_transformation_artifact.transformed_train_file_path
@@ -72,7 +135,7 @@ class ModelTrainer:
                 testArr[:, -1],
             )
 
-            model = self.train_model(x_train, y_train)
+            model = self.train_model(X_train=x_train, y_train=y_train, X_test=x_test, y_test=y_test)
 
 
             
