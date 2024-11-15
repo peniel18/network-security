@@ -61,7 +61,7 @@ class DataValidation:
             numerical_cols = scheme_file["numerical_columns"]
             # create set that stores strings 
             ExpectedDataTypes = {str(dtype) for column in scheme_file["columns"] 
-                                for dtype in column.values()    }
+                                for dtype in column.values() }
             print(ExpectedDataTypes)
 
             # validate each columns data type 
@@ -74,9 +74,6 @@ class DataValidation:
         except Exception as e: 
             logging.error(f"Error validaing numerical columns: {str(e)}")
             NetworkSecurityException(e, sys)
-
-        
-        #print(numericalColumns)
 
     def detect_dataset_drift(self, base_df, current_df, threshold = 0.50 ) -> bool: 
         try: 
@@ -137,13 +134,13 @@ class DataValidation:
                 )
 
             data_validation_artifact = DataValidationArtifact(
-                validation_status = driftStatus, 
-                valid_train_file_path = self.data_ingestion_artifact.trained_file_path, 
-                valid_test_file_path = self.data_ingestion_artifact.test_file_path, 
-                invalid_train_file_path = None, 
-                invalid_test_file_path = None, 
-                drift_report_file_path = self.data_validation_config.drift_report_file_path
-            )
+                                        validation_status = driftStatus, 
+                                        valid_train_file_path = self.data_ingestion_artifact.trained_file_path, 
+                                        valid_test_file_path = self.data_ingestion_artifact.test_file_path, 
+                                        invalid_train_file_path = None, 
+                                        invalid_test_file_path = None, 
+                                        drift_report_file_path = self.data_validation_config.drift_report_file_path
+                                    )
             # check numerical columns data types 
             NumericalStatus = self.validateNumericalColumns(test_dataframe)
             logging.info(f"Validation of Numerical columns data types Status: {NumericalStatus}")
