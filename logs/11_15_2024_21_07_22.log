@@ -1,0 +1,18 @@
+[2024-11-15 21:07:27,920] 85 root - INFO - Data Ingestion has Started
+[2024-11-15 21:07:27,922] 33 root - INFO - export_collection_as_dataframe has started
+[2024-11-15 21:09:21,555] 66 root - INFO - Data split spliting Completed
+[2024-11-15 21:09:21,562] 69 root - INFO - Exporting train and test file path
+[2024-11-15 21:09:21,689] 78 root - INFO - Exported train and test file path
+[2024-11-15 21:09:21,690] 18 root - INFO - Data Validation has Started
+[2024-11-15 21:09:21,691] 14 root - INFO - function: read_yaml_file has started
+[2024-11-15 21:09:21,759] 37 root - INFO - Required number of columns: 31
+[2024-11-15 21:09:21,773] 38 root - INFO - DataFrame columns: 31
+[2024-11-15 21:09:21,773] 37 root - INFO - Required number of columns: 31
+[2024-11-15 21:09:21,774] 38 root - INFO - DataFrame columns: 31
+[2024-11-15 21:09:22,075] 146 root - INFO - Validation of Numerical columns data types Status: True
+[2024-11-15 21:09:22,076] 59 root - INFO - Data Transformation has Started
+[2024-11-15 21:09:22,077] 31 root - INFO - Reading data at file Path Artifacts/11_15_2024_21_07_24/data_ingestion/ingested/train.csv
+[2024-11-15 21:09:22,110] 31 root - INFO - Reading data at file Path Artifacts/11_15_2024_21_07_24/data_ingestion/ingested/test.csv
+[2024-11-15 21:09:22,124] 44 root - INFO - get_data_transformation_object has started
+[2024-11-15 21:09:22,325] 53 root - INFO - Entered the save_object method of MainUtils class
+[2024-11-15 21:09:22,356] 57 root - INFO - Exited the save_object method of MainUtils class

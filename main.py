@@ -3,7 +3,8 @@ from networksecurity.components.data_validation import DataValidation
 from networksecurity.components.data_transformation import DataTransformation
 from networksecurity.exception.exception import NetworkSecurityException
 from networksecurity.logging.logger import logging
-from networksecurity.entity.config_entity import DataIngestionConfig, TrainingPipelineConfig, DataValidationConfig, DataTransformationConfig
+from networksecurity.entity.config_entity import DataIngestionConfig, TrainingPipelineConfig, DataValidationConfig, DataTransformationConfig, ModelTrainerConfig
+from networksecurity.components.model_trainer import ModelTrainer
 import os
 import sys
 
@@ -30,3 +31,11 @@ if __name__ == "__main__":
                 )
     dataTransArtifact = dataTrans.InitiateDataTransformation()
     print(dataTransArtifact)
+
+    modelTrainerConfig = ModelTrainerConfig(trainingPipeline)
+    modelTrainer = ModelTrainer(
+        model_trainer_config=modelTrainerConfig, 
+        data_transformation_artifact=dataTransArtifact
+    )
+    modeltrainerArtifact = modelTrainer.InitialModelTrainer()
+    print(modeltrainerArtifact)

@@ -13,7 +13,10 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier, AdaBoostClassifier
 import mlflow
 from urllib.parse import urlparse 
-#import dagshub
+import dagshub
+
+
+#dagshub.init(repo_owner='peniel18', repo_name='network-security', mlflow=True)
 
 
 class ModelTrainer: 
@@ -56,7 +59,7 @@ class ModelTrainer:
             "Decision Tree" : DecisionTreeClassifier(), 
             "Gradient Boosting" : GradientBoostingClassifier(verbose=1),
             "Logistic Regression" : LogisticRegression(verbose=1),
-            "ADABoost": AdaBoostClassifier(), 
+            "AdaBoost" : AdaBoostClassifier(), 
         }
         params = {
             "Decision Tree": {
@@ -135,8 +138,8 @@ class ModelTrainer:
                 testArr[:, -1],
             )
 
-            model = self.train_model(X_train=x_train, y_train=y_train, X_test=x_test, y_test=y_test)
-
+            modelTrainerArtifact = self.train_model(X_train=x_train, y_train=y_train, X_test=x_test, y_test=y_test)
+            return modelTrainerArtifact
 
             
         except Exception as e: 
