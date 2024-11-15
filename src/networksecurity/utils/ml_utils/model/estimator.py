@@ -8,6 +8,7 @@ from networksecurity.constant.training_pipeline import SAVED_MODEL_DIR, MODEL_FI
 
 class NetworkModel: 
     def __init__(self, preprocessor, model):
+        logging.info(f"Network Model Loaded")
         try: 
             self.preprocessor = preprocessor
             self.model = model 
@@ -18,5 +19,4 @@ class NetworkModel:
         X_transform = self.preprocessor.transform(X)
         yHat = self.model.predict(X_transform)
         return yHat
-    
     
