@@ -16,7 +16,7 @@ from urllib.parse import urlparse
 import dagshub
 
 
-#dagshub.init(repo_owner='peniel18', repo_name='network-security', mlflow=True)
+dagshub.init(repo_owner='peniel18', repo_name='network-security', mlflow=True)
 
 
 class ModelTrainer: 
@@ -32,7 +32,7 @@ class ModelTrainer:
         tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
         with mlflow.start_run():
             f1_score = classificationmetric.f1_score
-            precision_score = classificationmetric.precision_score
+            precision_score = classificationmetric.precision
             recall_score = classificationmetric.recall_score
 
 
@@ -104,7 +104,10 @@ class ModelTrainer:
 
         y_test_preds = best_model.predict(X_test)
         classification_test_metric = get_classification_score(y_true=y_test, y_pred=y_test_preds)
-        
+        # tracking using mlflow 
+        self.track_mlflow(best_model, classification_train_metric) # tracking train metrics 
+        self.track_mlflow(best_model, classification_test_metric) # tracking test metrics 
+
         preprocessor = load_object(file_path = self.data_transformation_artifact.transformed_object_file_path)
         model_dir_path = os.path.dirname(self.model_trainer_config.trained_model_file_path)
         os.makedirs(model_dir_path, exist_ok=True)

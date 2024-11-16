@@ -20,7 +20,7 @@ if __name__ == "__main__":
     dataIngestionArtifact = data_ingestion.IntiateDataIngestion()
     print(dataIngestionArtifact)
     data_validation_config = DataValidationConfig(trainingPipeline)
-    dataVal = DataValidation(data_ingestion_artifact=dataIngestionArtifact ,data_validation_config=data_validation_config)
+    dataVal = DataValidation(data_ingestion_artifact = dataIngestionArtifact, data_validation_config=data_validation_config)
     dataValArtifact = dataVal.initiate_data_validation()
     print(dataValArtifact)
 
@@ -34,8 +34,8 @@ if __name__ == "__main__":
 
     modelTrainerConfig = ModelTrainerConfig(trainingPipeline)
     modelTrainer = ModelTrainer(
-        model_trainer_config=modelTrainerConfig, 
-        data_transformation_artifact=dataTransArtifact
+        model_trainer_config = modelTrainerConfig, 
+        data_transformation_artifact = dataTransArtifact
     )
     modeltrainerArtifact = modelTrainer.InitialModelTrainer()
     print(modeltrainerArtifact)
