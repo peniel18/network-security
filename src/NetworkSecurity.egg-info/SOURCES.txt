@@ -23,6 +23,8 @@ src/networksecurity/exception/exception.py
 src/networksecurity/logging/__init__.py
 src/networksecurity/logging/logger.py
 src/networksecurity/pipelines/__init__.py
+src/networksecurity/pipelines/batch_prediction.py
+src/networksecurity/pipelines/training_pipeline.py
 src/networksecurity/utils/__init__.py
 src/networksecurity/utils/main_utils/__init__.py
 src/networksecurity/utils/main_utils/utils.py

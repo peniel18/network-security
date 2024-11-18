@@ -57,3 +57,20 @@ class TrainingPipeline:
             return modelTrainerArtifact
         except Exception as e: 
             raise NetworkSecurityException(e, sys)
+        
+
+    def runPipeline(self):
+        try:
+            dataIngestionArtifact = self.start_data_ingestion()
+            dataValidationArtifact = self.start_data_validation(data_ingestion_artifact=dataIngestionArtifact)
+            dataTransformationArtifact = self.start_data_transformation(data_validation_artifact=dataValidationArtifact)
+            modelTrainerArtifact = self.start_model_trainer(data_transformation_artifact=dataTransformationArtifact)
+            return modelTrainerArtifact
+        except Exception as e: 
+            raise NetworkSecurityException(e, sys)
+        
+
+if __name__ == "__main__":
+    pipeline = TrainingPipeline()
+    pipeline.runPipeline()
+    
