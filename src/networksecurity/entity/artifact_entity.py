@@ -35,4 +35,4 @@ class ClassificationMetricArtifact:
 class ModelTrainerArtifact:
     trained_mode_file_path: str 
     train_metric_artficat: ClassificationMetricArtifact
-    test_metric_artifact: ClassificationMetricArtifact
+    test_metric_artifact: ClassificationMetricArtifact           
