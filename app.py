@@ -13,7 +13,7 @@ import pandas as pd
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, File, UploadFile, Request
 from uvicorn import run
-from fastapi.responses import RedirectResponse
+from fastapi.responses import RedirectResponse, Response
 from fastapi.templating import Jinja2Templates
 
 
@@ -46,3 +46,16 @@ templates = Jinja2Templates(directory="./templates")
 @app.get("/", tags=["authentication"])
 async def index():
     return RedirectResponse(url="/docs")
+
+@app.get("/train")
+async def train_route():
+    try:
+        train_pipeline = TrainingPipeline()
+        train_pipeline.runPipeline()
+        return Response("Training Successful")
+    except Exception as e: 
+        raise NetworkSecurityException(e, sys)
+    
+
+if __name__ == "__main__":
+    run(app, host="localhost", port=8000)
