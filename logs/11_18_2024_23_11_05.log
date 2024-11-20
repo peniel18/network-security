@@ -1,0 +1,37 @@
+[2024-11-18 23:11:10,559] 1038 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"
+[2024-11-18 23:11:10,568] 107 dagshub - INFO - Accessing as peniel18
+[2024-11-18 23:11:12,014] 1038 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/repos/peniel18/network-security "HTTP/1.1 200 OK"
+[2024-11-18 23:11:12,804] 1038 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"
+[2024-11-18 23:11:12,806] 107 dagshub - INFO - Initialized MLflow to track repo "peniel18/network-security"
+[2024-11-18 23:11:12,808] 107 dagshub - INFO - Repository peniel18/network-security initialized!
+[2024-11-18 23:11:12,809] 21 root - INFO - Starting Data Ingestion
+[2024-11-18 23:11:12,810] 85 root - INFO - Data Ingestion has Started
+[2024-11-18 23:11:12,810] 33 root - INFO - export_collection_as_dataframe has started
+[2024-11-18 23:12:18,787] 66 root - INFO - Data split spliting Completed
+[2024-11-18 23:12:18,793] 69 root - INFO - Exporting train and test file path
+[2024-11-18 23:12:18,927] 78 root - INFO - Exported train and test file path
+[2024-11-18 23:12:18,928] 24 root - INFO - Data Ingestion completed
+[2024-11-18 23:12:18,929] 33 root - INFO - Data Validation has Started
+[2024-11-18 23:12:18,929] 18 root - INFO - Data Validation has Started
+[2024-11-18 23:12:18,929] 14 root - INFO - function: read_yaml_file has started
+[2024-11-18 23:12:19,033] 37 root - INFO - Required number of columns: 31
+[2024-11-18 23:12:19,034] 38 root - INFO - DataFrame columns: 31
+[2024-11-18 23:12:19,034] 37 root - INFO - Required number of columns: 31
+[2024-11-18 23:12:19,035] 38 root - INFO - DataFrame columns: 31
+[2024-11-18 23:12:19,853] 146 root - INFO - Validation of Numerical columns data types Status: True
+[2024-11-18 23:12:19,854] 37 root - INFO - Data Validation has been completed
+[2024-11-18 23:12:19,855] 44 root - INFO - Data Transformation has Started
+[2024-11-18 23:12:19,855] 59 root - INFO - Data Transformation has Started
+[2024-11-18 23:12:19,855] 31 root - INFO - Reading data at file Path Artifacts/11_18_2024_23_11_06/data_ingestion/ingested/train.csv
+[2024-11-18 23:12:19,894] 31 root - INFO - Reading data at file Path Artifacts/11_18_2024_23_11_06/data_ingestion/ingested/test.csv
+[2024-11-18 23:12:19,909] 44 root - INFO - get_data_transformation_object has started
+[2024-11-18 23:12:20,036] 53 root - INFO - Entered the save_object method of MainUtils class
+[2024-11-18 23:12:20,102] 57 root - INFO - Exited the save_object method of MainUtils class
+[2024-11-18 23:12:20,102] 53 root - INFO - Entered the save_object method of MainUtils class
+[2024-11-18 23:12:20,130] 57 root - INFO - Exited the save_object method of MainUtils class
+[2024-11-18 23:16:54,910] 870 urllib3.connectionpool - WARNING - Retrying (Retry(total=4, connect=4, read=5, redirect=5, status=5)) after connection broken by 'NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7fea137ea860>: Failed to resolve 'dagshub.com' ([Errno -2] Name or service not known)")': /peniel18/network-security.mlflow/api/2.0/mlflow/runs/create
+[2024-11-18 23:21:47,037] 11 root - INFO - Network Model Loaded
+[2024-11-18 23:21:47,037] 53 root - INFO - Entered the save_object method of MainUtils class
+[2024-11-18 23:21:47,054] 57 root - INFO - Exited the save_object method of MainUtils class
+[2024-11-18 23:21:47,054] 53 root - INFO - Entered the save_object method of MainUtils class
+[2024-11-18 23:21:47,259] 57 root - INFO - Exited the save_object method of MainUtils class
