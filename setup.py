@@ -26,11 +26,11 @@ def get_requirements() -> List[str]:
 
 
 setup(
-    name = "NetworkSecurity", 
+    name = "networksecurity", 
     author = "peniel18",
     author_email = "penieletornam18@gmail.com",
     version = "0.0.1", 
-    find_packages = find_packages(), 
+    find_packages = find_packages(exclude=["logs*", "Artifacts*", "notebooks*", "templates*"]), 
     install_requires = get_requirements()
 )
 
