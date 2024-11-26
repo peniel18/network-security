@@ -25,3 +25,8 @@
 [2024-11-24 02:12:11,253] 53 root - INFO - Entered the save_object method of MainUtils class
 [2024-11-24 02:12:11,278] 57 root - INFO - Exited the save_object method of MainUtils class
 [2024-11-24 02:20:08,582] 870 urllib3.connectionpool - WARNING - Retrying (Retry(total=4, connect=5, read=4, redirect=5, status=5)) after connection broken by 'TimeoutError('The write operation timed out')': /peniel18/network-security.mlflow/api/2.0/mlflow-artifacts/artifacts/b8de463a2b5043e9bfa85a552f3e6339/b2e7f309a6904d0d930b2d5b6fd5a624/artifacts/model/model.pkl
+[2024-11-24 02:20:42,282] 11 root - INFO - Network Model Loaded
+[2024-11-24 02:20:42,282] 53 root - INFO - Entered the save_object method of MainUtils class
+[2024-11-24 02:20:42,298] 57 root - INFO - Exited the save_object method of MainUtils class
+[2024-11-24 02:20:42,298] 53 root - INFO - Entered the save_object method of MainUtils class
+[2024-11-24 02:20:42,644] 57 root - INFO - Exited the save_object method of MainUtils class

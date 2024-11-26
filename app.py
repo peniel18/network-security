@@ -56,6 +56,28 @@ async def train_route():
     except Exception as e: 
         raise NetworkSecurityException(e, sys)
     
+@app.get("/predict")
+async def predict_route(request: Request, file: UploadFile = File(...)):
+    try: 
+        df = pd.read_csv(file.file)
+        preprocessor = load_object("final_model/preprocessor.pkl")
+        model = load_object("final_model/model.pkl")
+        networkModel = NetworkModel(preprocessor=preprocessor, model=model)
+        yHat = networkModel.predict(df)
+        df["predicted_column"] = yHat 
+        df.to_csv("predictions/output.csv")
+        table_html = df.to_html(classes="tabel table-striped")
+        context = {
+            "request" : request, 
+            "tabel" : table_html
+        }
+        return templates.TemplateResponse("table.html", context)
+    except Exception as e: 
+        raise NetworkSecurityException(e, sys)
+
+
+
+
 
 if __name__ == "__main__":
     run(app, host="localhost", port=8000)
