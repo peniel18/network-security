@@ -1,0 +1,6 @@
+[2024-11-26 23:58:39,195] 1038 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"
+[2024-11-26 23:58:39,202] 107 dagshub - INFO - Accessing as peniel18
+[2024-11-26 23:58:39,625] 1038 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/repos/peniel18/network-security "HTTP/1.1 200 OK"
+[2024-11-26 23:58:40,163] 1038 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"
+[2024-11-26 23:58:40,165] 107 dagshub - INFO - Initialized MLflow to track repo "peniel18/network-security"
+[2024-11-26 23:58:40,166] 107 dagshub - INFO - Repository peniel18/network-security initialized!
