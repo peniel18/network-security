@@ -80,7 +80,7 @@ class TrainingPipeline:
         Push model artifacts to s3 with timestamps
         """
         try:
-            s3_model_url = f"s3://{TRAINING_BUCKET_NAME}//final_model/{self.training_pipeline_config.timestamp}"
+            s3_model_url = f"s3://{TRAINING_BUCKET_NAME}/final_model/{self.training_pipeline_config.timestamp}"
             self.s3_sync.sync_folder_to_s3(
                 folder = self.training_pipeline_config.model_dir, 
                 aws_bucket_url = s3_model_url
