@@ -1,9 +1,0 @@
-[2024-11-25 23:04:40,940] 1038 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"
-[2024-11-25 23:04:40,949] 107 dagshub - INFO - Accessing as peniel18
-[2024-11-25 23:04:41,873] 1038 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/repos/peniel18/network-security "HTTP/1.1 200 OK"
-[2024-11-25 23:04:42,408] 1038 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"
-[2024-11-25 23:04:42,412] 107 dagshub - INFO - Initialized MLflow to track repo "peniel18/network-security"
-[2024-11-25 23:04:42,414] 107 dagshub - INFO - Repository peniel18/network-security initialized!
-[2024-11-25 23:04:58,988] 21 root - INFO - Starting Data Ingestion
-[2024-11-25 23:04:58,989] 85 root - INFO - Data Ingestion has Started
-[2024-11-25 23:04:58,990] 33 root - INFO - export_collection_as_dataframe has started
