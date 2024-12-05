@@ -37,3 +37,24 @@ The system requires the following Python packages, listed in `requirements.txt`:
 ```bash
 git clone https://github.com/peniel18/network-security
 cd network-security
+```
+
+### 2. Set Up a Virtual Environment
+
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+### Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### Run the FastAPI Server
+
+```bash
+python3 app.py
+```
